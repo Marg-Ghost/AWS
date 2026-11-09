@@ -4,10 +4,15 @@ import uvicorn
 from fastapi import Basemodel
 
 #internal
-aws_ai.ai_connect
+BASEDIR = Path(__file__).resolve().parent()
+import BASEDIR.aws_ai.ai_connect
 
 app = FASTAPI()
-app.mount("/static", static("web"))
+app.add_middleware(
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 #########################################################
 #Action-Contorler
@@ -29,4 +34,4 @@ async def main_monitor():
 
 
 if __name__ == "__main__":
-    uvicorn(,"127.0.0.1:8000",app)
+    uvicorn.run(app,host="127.0.0.1",port=9000)

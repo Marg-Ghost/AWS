@@ -1,17 +1,26 @@
+//external
 #include <iostream>
-
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+//internal
+#include "structure/ErrorDetector.h"
 
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
+    /*
+     *SChua mal anch einem Weg .sh --> .cpp
+     *oder jedesmal die executable for each docker ps
+     */
+    std::vector<std::string> error_messages= {"Error 1: Verbindung fehlgeschlagen", "[200] OK", "[500]", "SyntaxError"};
+    std::vector<std::string> docker_deamon = {"ollama-1", "filemanager-101", "test-docker-2", "IDK-Test-9"};
 
-    const auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    std::vector<ErrorDetector> docker_eval ={};
+    for (int i = 0; i < docker_deamon.size(); i++) {
+        std::count <<"Checking for image : " + docker_deamon[i];
+        std::count <<"Error Message : " + error_messages[i];
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+        docker_eval.emplace_back(ErrorDetector(docker_deamon[i]));
+
+        //logic : includiert in den loop für O(n) statt O(n^2)
+        if 
     }
 
-    return 0;
+
 }

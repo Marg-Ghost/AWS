@@ -27,3 +27,5 @@ Specialty:
 - Let the user see teh imposed solutions and fix it via browser easily 
 
 - Learing : explain AI feture direktly to an AI + another RAG with sepcilizes Vector DB
+
+- Restrictet acces to only certain areas to manage diffrent grades of ops

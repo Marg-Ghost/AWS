@@ -7,17 +7,30 @@
 #include "structure/logic/DockerSystem.h"
 #include "structure/FormalStructures/Stack.h"
 #include "structure/FormalStructures/Item.h"
+#include "structure/API/ServerPort.h"
 
 std::vector<std::string> get_container();
 std::vector<DockerSystem> get_error_messages(std::vector<std::string> docker_deamon);
 int main() {
+    ServerPort server = ServerPort();
+
+
+
+
+
+
+
+
+
+
+
+    /*
     //open docker container
     std::vector<std::string> docker_deamon = get_container();
     //Error-docker-systems with a stack of last max.Stack(likely 5) log entries
     std::vector<DockerSystem>error_messages  = get_error_messages(docker_deamon);
     free(docker_deamon);
-
-
+    */
 }
 std::vector<std::string> get_container() {
     std::vector<std::string> docker_deamon;

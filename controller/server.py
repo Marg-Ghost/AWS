@@ -18,7 +18,7 @@ app = FastAPI()
 app.mount("/web", StaticFiles(directory=str(WEBDIR), html=True), name="web")
 
 #########################################################
-#Monitor 
+#Frontend
 #########################################################
 # pages
 app.get("/")
@@ -28,14 +28,27 @@ async def main_monitor():
     if not direction.exists():
         return HTTPException(status_code=404, detail=f"File {file_name} not found")
     return FileResponse(str(direction))
-# getter
+
+# Intel-getter
 app.get("/all_servers")
 async def get_all_servers():
     from ...data.get_data import Database
-    db = Database("server.db", "docker_deamons")
+    db = Database("Docker.db", "docker_deamons")
     servers = db.get_all_servers()
     return {"servers": servers}
 
+##########################################################
+#Backend
+##########################################################
+
+#cpp Befahlsaufrufe
+app.get("/server_status/basic/check_all")
+async def check_all_server():
+    from check_client import check_all_server
+
+app.get("/server_status/settings/refresh_total_server")
+async def check_all_server():
+    from check_client import check_all_server_complete
 
 
 if __name__ == "__main__":

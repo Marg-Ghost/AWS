@@ -1,37 +1,43 @@
 #external
-from fastapi import FASTAPI
+#Server
+import html
+
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import uvicorn
-from fastapi import Basemodel
+#System
+import pathlib
 
-#internal
-BASEDIR = Path(__file__).resolve().parent()
-import BASEDIR.aws_ai.ai_connect
 
-app = FASTAPI()
-app.add_middleware(
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+WEBDIR = ROOT / "web"
 
-#########################################################
-#Action-Contorler
-#########################################################
-post.app("/ai_endpoint")
-async def eval_problem(problem : str) -> dict:
-    #AI endpoint
+app = FastAPI()
 
-    #connection to monitor
-
+app.mount("/web", StaticFiles(directory=str(WEBDIR), html=True), name="web")
 
 #########################################################
 #Monitor 
 #########################################################
-get.app("/")
+# pages
+app.get("/")
 async def main_monitor():
-    pass
+    file_name = "index.html" 
+    direction = WEBDIR / file_name
+    if not direction.exists():
+        return HTTPException(status_code=404, detail=f"File {file_name} not found")
+    return FileResponse(str(direction))
+# getter
+app.get("/all_servers")
+async def get_all_servers():
+    from ...data.get_data import Database
+    db = Database("server.db", "docker_deamons")
+    servers = db.get_all_servers()
+    return {"servers": servers}
 
 
 
 if __name__ == "__main__":
+    print (WEBDIR / "index.html" )
     uvicorn.run(app,host="127.0.0.1",port=9000)

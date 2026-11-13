@@ -5,19 +5,18 @@
 #ifndef AWS_HACKATHAN_ITEM_H
 #define AWS_HACKATHAN_ITEM_H
 
-#include "ErrorVal.h"
 
 class Item {
 private:
-    Item below;
-    ErrorVal data;
+    Item next;
+    std::string data;
 public:
-    Item();
+    Item(std::string error);
     //getter && setter
-    void set_below(Item below);
-    Item get_below();
+    void set_next(Item below);
+    Item get_next();
     void set_data(Item data);
-    ErrorVal get_data();
+    std::string get_data();
 };
 
 

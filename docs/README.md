@@ -21,17 +21,32 @@ subgraph Docker-Client
 end
 
 subgraph Check-Client
-    connection[bash.sh\n//n-Docker-Files_estimate_via_docker-ps]
+    txt1[get_container.sh]
+    txt2[get_logs.sh]
     subgraph Evaluate
         output[main.cpp]
         Klasse1[ServerPort.h]
         Klasse2[ErrorDetector.h]
         Klasse4[Stack.h]
-        klasse5[Item.h]
-        Klasse2 --> klasse5
+        Klasse5[Item.h]
+        Klasse6[Database]
+        Klasse7[DockerSystem.h]
         Klasse1 --> output
-        klasse5 --> Klasse4
-        Klasse4 --> output
+        
+        subgraph Trie
+            KlasseA[Trie.h]
+            ErrorList["ErrorWord.txt"]
+            
+        end
+        Klasse2 --> KlasseA
+        KlasseA --> ErrorList
+        txt1 --> Klasse6 --> output
+        output --> txt2 
+        txt2 --> Klasse5
+        Klasse5 --> Klasse4
+        Klasse4 --> Klasse2
+        Klasse2 --> Klasse7
+        Klasse7 --> output
     end  
   end
   
@@ -56,13 +71,14 @@ end
     web[Webpage: HTML/CSS/JS]
  end
  
-connection --> Logs
-connection -->  Klasse2
+
+
 server --> ai
 server --> Klasse1
 Klasse1 --> server 
 server --> UI
-
+txt1 --> Docker-Client
+txt2 --> Logs
 Klasse1 --> sharedErrorDB
 
 

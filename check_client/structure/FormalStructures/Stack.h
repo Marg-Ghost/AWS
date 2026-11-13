@@ -4,24 +4,24 @@
 
 #ifndef AWS_HACKATHAN_STACK_H
 #define AWS_HACKATHAN_STACK_H
-#include "Item.h"
+#include "../API/Item.h"
 
 
 class Stack {
 private:
     Item top;
+    int size;
     int max_size;
 public:
-    Stack();
+    Stack(int size);
     //getter && setter
     Item get_top();
-    void set_top(Item item);
     //baisc
     void push(Item item);
     Item pop();
     //custome
-    bool empty();
     bool full();
+    void clean();
 };
 
 
